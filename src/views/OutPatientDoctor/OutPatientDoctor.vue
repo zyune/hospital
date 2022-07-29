@@ -117,13 +117,13 @@ import { listPayInfoByCaseId } from "@/api/casePayInfo";
 
 import OutPatientPreDiagnose from "@/components/outpatientdoctor/OutPatientPreDiagnose";
 import CaseTemplateAdmin from "@/components/outpatientdoctor/CaseTemplateAdmin";
-import ProjectApplication from "@/components/outpatientdoctor/ProjectApplication";
-import CaseRecipe from "@/components/outpatientdoctor/CaseRecipe";
-import CaseDisposition from "@/components/outpatientdoctor/CaseDisposition";
-import FinalCase from "@/components/outpatientdoctor/FinalCase";
-import CasePayList from "@/components/outpatientdoctor/CasePayList";
-import { successDialog, failDialog } from "@/utils/notification";
-import { updateOutpatientQueue } from "@/api/notification/outpatientNotification";
+// import ProjectApplication from "@/components/outpatientdoctor/ProjectApplication";
+// import CaseRecipe from "@/components/outpatientdoctor/CaseRecipe";
+// import CaseDisposition from "@/components/outpatientdoctor/CaseDisposition";
+// import FinalCase from "@/components/outpatientdoctor/FinalCase";
+// import CasePayList from "@/components/outpatientdoctor/CasePayList";
+// import { successDialog, failDialog } from "@/utils/notification";
+// import { updateOutpatientQueue } from "@/api/notification/outpatientNotification";
 
 export default {
   name: "OutPatientDoctor",
