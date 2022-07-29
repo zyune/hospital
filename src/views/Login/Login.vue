@@ -5,7 +5,7 @@
         <div style="text-align: center">
           <img src="@/assets/icons/project_logo.png" />
         </div>
-        <h2 class="login-title color-main">登录</h2>
+        <h2 class="login-title color-main">{{ $t('login.btn') }}</h2>
         <el-form-item>
           <el-input
             name="userId"
@@ -40,9 +40,9 @@
         </el-form-item>
         <p class="alertInfo">{{ alertInfo }}</p>
         <el-form-item style="margin-bottom: 60px">
-          <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleLogin"
-            >登录</el-button
-          >
+          <el-button style="width: 100%" type="primary" :loading="loading" @click.native.prevent="handleLogin">{{
+            $t('login.btn')
+          }}</el-button>
         </el-form-item>
       </el-form>
     </el-card>

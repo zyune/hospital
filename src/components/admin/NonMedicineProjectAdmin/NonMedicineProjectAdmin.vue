@@ -79,10 +79,10 @@
       </div>
     </el-card>
 
-    <el-dialog :visible.sync="addNonmedicineProjectDialogVisible" width="60%" :before-close="handleClose">
+    <el-dialog :visible.sync="addNonmedicineProjectDialogVisible" width="60%" :before-close="handleClose1">
       <nonmedicineproject-adder>添加非药品收费项目</nonmedicineproject-adder>
     </el-dialog>
-    <el-dialog :visible.sync="editNonmedicineProjectDialogVisible" width="60%" :before-close="handleClose">
+    <el-dialog :visible.sync="editNonmedicineProjectDialogVisible" width="60%" :before-close="handleClose2">
       <nonmedicineproject-editor v-model="currentNonmedicineProject">编辑非药品收费项目信息</nonmedicineproject-editor>
     </el-dialog>
   </div>
@@ -121,6 +121,7 @@ export default {
       currentPage: 1,
       currentSize: 10,
       currentNonmedicineProject: {},
+      chosenOption: '',
     };
   },
 
@@ -215,6 +216,12 @@ export default {
         (this.currentPage - 1) * this.currentSize,
         (this.currentPage - 1) * this.currentSize + this.currentSize
       );
+    },
+    handleClose1() {
+      this.addNonmedicineProjectDialogVisible = false;
+    },
+    handleClose2() {
+      this.editNonmedicineProjectDialogVisible = false;
     },
   },
 

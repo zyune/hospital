@@ -80,17 +80,20 @@ export default {
   },
   computed: {
     usersDisplayed() {
-      return this.users.filter((data) => {
-        var isInclude = false;
-        if (this.chosenOption === 'userId') {
-          isInclude = data.userId.toString().toLowerCase().includes(this.userInput.toLowerCase());
-        } else if (this.chosenOption === 'userName') {
-          isInclude = data.userName.toString().toLowerCase().includes(this.userInput.toLowerCase());
-        } else {
-          isInclude = true;
-        }
-        return !this.userInput || isInclude;
-      });
+      return (
+        this.users.length &&
+        this.users.filter((data) => {
+          var isInclude = false;
+          if (this.chosenOption === 'userId') {
+            isInclude = data.userId.toString().toLowerCase().includes(this.userInput.toLowerCase());
+          } else if (this.chosenOption === 'userName') {
+            isInclude = data.userName.toString().toLowerCase().includes(this.userInput.toLowerCase());
+          } else {
+            isInclude = true;
+          }
+          return !this.userInput || isInclude;
+        })
+      );
     },
   },
   data() {

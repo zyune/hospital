@@ -7,7 +7,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Print from 'vue-print-nb';
 import echarts from 'echarts';
-
+import i18n from '@/i18n';
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI, {
@@ -20,6 +20,7 @@ Vue.prototype.$echarts = echarts;
 Vue.prototype.$axios = axios;
 
 new Vue({
+  i18n,
   router,
   store,
   render: (h) => h(App),
