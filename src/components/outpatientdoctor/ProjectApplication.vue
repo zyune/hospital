@@ -3,53 +3,56 @@
     <!-- 左侧操作区 -->
     <div class="service-main-container">
       <!-- 申请的操作栏以及表格, 做成一个卡片 -->
-      <el-card
-        v-for="(collection, index) in caseExaminations.collections"
-        v-bind:key="collection.collectionId"
-      >
+      <el-card v-for="(collection, index) in caseExaminations.collections" v-bind:key="collection.collectionId">
         <!-- 操作栏 -->
         <div slot="header" class="clearfix">
-          <span>{{typeName}}申请单 {{index + 1}}</span>
+          <span>{{ typeName }}申请单 {{ index + 1 }}</span>
           <el-button
-            style="float:right; margin-left: 10px;"
+            style="float: right; margin-left: 10px"
             type="text"
             icon="el-icon-document-add"
             @click="handleAddTemplate(collection)"
-          >存为模版</el-button>
+            >存为模版</el-button
+          >
           <el-button
-            style="float:right; margin-left: 10px;"
+            style="float: right; margin-left: 10px"
             type="text"
             icon="el-icon-s-check"
             @click="handleSubmit(collection, index)"
             :disabled="isEditable[index]"
-          >开立</el-button>
+            >开立</el-button
+          >
           <el-button
-            style="float:right; margin-left: 10px;"
+            style="float: right; margin-left: 10px"
             type="text"
             icon="el-icon-delete-solid"
             :disabled="!isEditable[index]"
-          >作废</el-button>
+            >作废</el-button
+          >
           <el-button
-            style="float:right; margin-left: 10px;"
+            style="float: right; margin-left: 10px"
             type="text"
             icon="el-icon-folder-checked"
             @click="handleTempSave(collection)"
             :disabled="isEditable[index]"
-          >暂存</el-button>
+            >暂存</el-button
+          >
           <el-button
-            style="float:right; margin-left: 10px;"
+            style="float: right; margin-left: 10px"
             type="text"
             icon="el-icon-refresh-right"
             :disabled="isEditable[index]"
             @click="handleClear(collection)"
-          >清空</el-button>
+            >清空</el-button
+          >
           <el-button
             style="margin-left: 10px"
             type="text"
             icon="el-icon-circle-plus"
             @click="handleAddProjectDialog(collection)"
             :disabled="isEditable[index]"
-          >新增项目</el-button>
+            >新增项目</el-button
+          >
         </div>
         <!-- 项目列表 -->
         <div class>
@@ -57,10 +60,10 @@
             <el-table-column type="expand">
               <template slot-scope="props">
                 <div class="collection-detail">
-                  <p>项目名称：{{props.row.projectName}}</p>
-                  <p>执行部门：{{props.row.departmentName}}</p>
-                  <p>检查目的：{{props.row.goal}}</p>
-                  <p>检查要求：{{props.row.requirement}}</p>
+                  <p>项目名称：{{ props.row.projectName }}</p>
+                  <p>执行部门：{{ props.row.departmentName }}</p>
+                  <p>检查目的：{{ props.row.goal }}</p>
+                  <p>检查要求：{{ props.row.requirement }}</p>
                 </div>
                 <div class="table-container">
                   <el-table :data="props.row.items">
@@ -76,19 +79,16 @@
             <el-table-column prop="status" label="执行状态" :formatter="statusFormatter"></el-table-column>
             <el-table-column label="检查结果">
               <template slot-scope="scope">
-                <el-button
-                  type="text"
-                  @click="showResult(collection.collectionId, scope.row.projectId)"
-                >查看检查结果</el-button>
+                <el-button type="text" @click="showResult(collection.collectionId, scope.row.projectId)"
+                  >查看检查结果</el-button
+                >
               </template>
             </el-table-column>
             <el-table-column>
               <template slot-scope="scope">
-                <el-button
-                  type="text"
-                  @click="handleRemoveProject(scope.row, collection)"
-                  icon="el-icon-delete"
-                >删除</el-button>
+                <el-button type="text" @click="handleRemoveProject(scope.row, collection)" icon="el-icon-delete"
+                  >删除</el-button
+                >
               </template>
             </el-table-column>
           </el-table>
@@ -109,12 +109,7 @@
       ></project-template>
     </div>
     <!-- 新增项目dialog -->
-    <el-dialog
-      title="新增检查项目"
-      :visible.sync="dialogAddProject"
-      :before-close="handleClose"
-      width="600px"
-    >
+    <el-dialog title="新增检查项目" :visible.sync="dialogAddProject" :before-close="handleClose" width="600px">
       <div>
         <el-card shadow="hover" style="margin-bottom: 10px">
           <div slot="header">
@@ -138,7 +133,7 @@
             <el-form-item label="检查目的">
               <el-input
                 type="textarea"
-                :autosize="{ minRows: 2, maxRows: 8}"
+                :autosize="{ minRows: 2, maxRows: 8 }"
                 style="width: 300px"
                 v-model="newProject.goal"
               ></el-input>
@@ -146,7 +141,7 @@
             <el-form-item label="检查要求">
               <el-input
                 type="textarea"
-                :autosize="{ minRows: 2, maxRows: 8}"
+                :autosize="{ minRows: 2, maxRows: 8 }"
                 style="width: 300px"
                 v-model="newProject.requirement"
               ></el-input>
@@ -168,7 +163,7 @@
               value-key="itemName"
             ></el-autocomplete>
             <el-input-number :min="1" :max="10" label="单位数量" v-model="newItem.amount"></el-input-number>
-            <span style="margin: 0px 0px 0px 10px">单位:{{newItem.unit}}</span>
+            <span style="margin: 0px 0px 0px 10px">单位:{{ newItem.unit }}</span>
             <el-button
               type="primary"
               icon="el-icon-plus"
@@ -204,7 +199,7 @@
           <el-form-item label="诊断意见">
             <el-input
               type="textarea"
-              :autosize="{ minRows: 2, maxRows: 8}"
+              :autosize="{ minRows: 2, maxRows: 8 }"
               style="width: 300px"
               v-model="currentResult.advice"
               disabled
@@ -213,7 +208,7 @@
           <el-form-item label="检查检验结果所见">
             <el-input
               type="textarea"
-              :autosize="{ minRows: 2, maxRows: 8}"
+              :autosize="{ minRows: 2, maxRows: 8 }"
               style="width: 300px"
               v-model="currentResult.resultDescription"
               disabled
@@ -229,12 +224,7 @@
       </span>
     </el-dialog>
     <!-- 存为检查/检验模版 dialog -->
-    <el-dialog
-      title="添加组套"
-      :visible.sync="dialogAddTemplate"
-      :before-close="handleClose"
-      width="600px"
-    >
+    <el-dialog title="添加组套" :visible.sync="dialogAddTemplate" :before-close="handleClose" width="600px">
       <el-card shadow="hover" style="margin-bottom: 10px">
         <div slot="header" class="clearfix">
           <span>组套内容</span>
@@ -244,10 +234,10 @@
             <el-table-column type="expand">
               <template slot-scope="props">
                 <div class="collection-detail">
-                  <p>项目名称：{{props.row.projectName}}</p>
-                  <p>执行部门：{{props.row.departmentName}}</p>
-                  <p>检查目的：{{props.row.goal}}</p>
-                  <p>检查要求：{{props.row.requirement}}</p>
+                  <p>项目名称：{{ props.row.projectName }}</p>
+                  <p>执行部门：{{ props.row.departmentName }}</p>
+                  <p>检查目的：{{ props.row.goal }}</p>
+                  <p>检查要求：{{ props.row.requirement }}</p>
                 </div>
                 <div class="table-container">
                   <el-table :data="props.row.items">
@@ -298,17 +288,15 @@ import {
   listAllItems,
   saveCollection,
   submitCollection,
-  getProjectResult
-} from "@/api/project";
-import { projectStatusCodeToString } from "@/utils/interpreter";
-import { PassThrough } from "stream";
-import { isContext } from "vm";
-import { successDialog, failDialog } from "@/utils/notification";
-import ProjectTemplate from "@/components/outpatientdoctor/ProjectTemplate";
-import { saveProjectTemplate } from "@/api/projectTemplate";
+  getProjectResult,
+} from '@/api/project';
+import { projectStatusCodeToString } from '@/utils/interpreter';
+import { successDialog, failDialog } from '@/utils/notification';
+import ProjectTemplate from '@/components/outpatientdoctor/ProjectTemplate';
+import { saveProjectTemplate } from '@/api/projectTemplate';
 
 export default {
-  name: "ProjectApplication",
+  name: 'ProjectApplication',
   data() {
     return {
       dialogAddProject: false,
@@ -325,37 +313,34 @@ export default {
       currentResult: {},
       scopes: [
         {
-          value: "1",
-          label: "个人"
+          value: '1',
+          label: '个人',
         },
         {
-          value: "2",
-          label: "部门"
+          value: '2',
+          label: '部门',
         },
         {
-          value: "3",
-          label: "全院"
-        }
-      ]
+          value: '3',
+          label: '全院',
+        },
+      ],
     };
   },
   props: {
     value: Object,
     type: Number,
-    typeName: String
+    typeName: String,
   },
   computed: {
-    isEditable: function() {
-      console.log("isEditable Updated");
+    isEditable: function () {
+      console.log('isEditable Updated');
       var collections = this.caseExaminations.collections;
       var isEditable = [];
       var i = 0;
       var length = collections.length;
       for (i = 0; i < length; i++) {
-        if (
-          collections[i].projects.length !== 0 &&
-          collections[i].projects[0].status !== 1
-        ) {
+        if (collections[i].projects.length !== 0 && collections[i].projects[0].status !== 1) {
           isEditable.push(true);
         } else {
           isEditable.push(false);
@@ -370,39 +355,39 @@ export default {
         return this.value;
       },
       set(v) {
-        this.$emit("input", v);
-      }
-    }
+        this.$emit('input', v);
+      },
+    },
   },
   methods: {
     success() {
       this.$message({
-        message: "操作成功",
-        type: "success"
+        message: '操作成功',
+        type: 'success',
       });
     },
 
     // 挂号失败提示
     fail() {
-      this.$message.error("操作失败");
+      this.$message.error('操作失败');
     },
     handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then(_ => {
+      this.$confirm('确认关闭？')
+        .then((_) => {
           done();
         })
-        .catch(_ => {});
+        .catch((_) => {});
     },
     handleAddCollection() {
       getNewCollectionId(this.type).then(
-        response => {
+        (response) => {
           const newCollectionId = response.data.data.collectionId;
           this.caseExaminations.collections.push({
             collectionId: newCollectionId,
-            projects: []
+            projects: [],
           });
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
@@ -413,32 +398,22 @@ export default {
     },
     queryProjectSearch(queryString, cb) {
       var projects = this.projects;
-      var results = queryString
-        ? projects.filter(this.createProjectFilter(queryString))
-        : projects;
+      var results = queryString ? projects.filter(this.createProjectFilter(queryString)) : projects;
       cb(results);
     },
     queryItemSearch(queryString, cb) {
       var items = this.items;
-      var results = queryString
-        ? items.filter(this.createItemFilter(queryString))
-        : items;
+      var results = queryString ? items.filter(this.createItemFilter(queryString)) : items;
       cb(results);
     },
     createProjectFilter(queryString) {
-      return project => {
-        return (
-          project.projectName
-            .toLowerCase()
-            .indexOf(queryString.toLowerCase()) === 0
-        );
+      return (project) => {
+        return project.projectName.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
       };
     },
     createItemFilter(queryString) {
-      return item => {
-        return (
-          item.itemName.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-        );
+      return (item) => {
+        return item.itemName.toLowerCase().indexOf(queryString.toLowerCase()) === 0;
       };
     },
     handleSelectProject(item) {
@@ -446,11 +421,11 @@ export default {
       this.newProject.projectId = item.projectId;
       // 去查询相应project下的可用小项信息
       listAllItems(this.newProject.projectId).then(
-        response => {
+        (response) => {
           this.items = response.data.data;
           console.log(this.items);
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
@@ -466,7 +441,7 @@ export default {
     },
     handleRemoveItem(row) {
       this.newProject.items.splice(
-        this.newProject.items.findIndex(item => {
+        this.newProject.items.findIndex((item) => {
           item.itemName === row.itemName;
         }),
         1
@@ -474,7 +449,7 @@ export default {
     },
     handleRemoveProject(row, collection) {
       collection.projects.splice(
-        collection.projects.findIndex(project => {
+        collection.projects.findIndex((project) => {
           project.projectName == row.projectName;
         }),
         1
@@ -489,15 +464,15 @@ export default {
     handleConfirmAdd() {
       this.dialogAddProject = false;
       const repeatedProject = this.currentCollection.projects.filter(
-        project => project.projectName === this.newProject.projectName
+        (project) => project.projectName === this.newProject.projectName
       );
       if (repeatedProject.length === 0) {
         this.newProject.status = 1;
         this.currentCollection.projects.push(this.newProject);
         this.newProject = { items: [] };
-        successDialog("项目添加成功");
+        successDialog('项目添加成功');
       } else {
-        failDialog("失败：该项目已存在");
+        failDialog('失败：该项目已存在');
       }
       this.newItem = {};
     },
@@ -506,26 +481,26 @@ export default {
       this.currentCollection = collection;
     },
     handleTempSave(collection) {
-      collection.roleId = this.$store.getters["user/currentRoleId"];
+      collection.roleId = this.$store.getters['user/currentRoleId'];
       collection.caseId = this.caseExaminations.caseId;
-      collection.applicantRoleId = this.$store.getters["user/currentRoleId"];
+      collection.applicantRoleId = this.$store.getters['user/currentRoleId'];
       collection.collectionType = this.type;
       saveCollection(collection).then(
-        response => {
+        (response) => {
           if (response.data.code === 200) {
-            this.success("缴费");
+            this.success('缴费');
           } else {
-            this.fail("缴费");
+            this.fail('缴费');
           }
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
     },
     handleSubmit(collection, index) {
       collection.caseId = this.caseExaminations.caseId;
-      collection.applicantRoleId = this.$store.getters["user/currentRoleId"];
+      collection.applicantRoleId = this.$store.getters['user/currentRoleId'];
       collection.collectionType = this.type;
       // 将所有内存的project 状态都改为 2.已开立
       var i;
@@ -534,15 +509,15 @@ export default {
         collection.projects[i].status = 2;
       }
       submitCollection(collection).then(
-        response => {
+        (response) => {
           if (response.data.code === 200) {
-            this.success("缴费");
+            this.success('缴费');
           } else {
-            this.fail("缴费");
+            this.fail('缴费');
           }
           this.$set(this.caseExaminations.collections, index, collection);
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
@@ -555,81 +530,76 @@ export default {
       var data = {
         collectionId: collectionId,
         projectId: projectId,
-        projectType: this.type
+        projectType: this.type,
       };
       getProjectResult(data).then(
-        response => {
+        (response) => {
           this.currentResult = response.data.data.result;
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
       this.dialogShowResult = true;
     },
     useProjectTemplate(givenTemplate) {
-      console.log("使用了模版");
-      givenTemplate.roleId = this.$store.getters["user/currentRoleId"];
+      console.log('使用了模版');
+      givenTemplate.roleId = this.$store.getters['user/currentRoleId'];
       givenTemplate.caseId = this.caseExaminations.caseId;
       givenTemplate.collectionType = givenTemplate.type;
-      givenTemplate.applicantRoleId = this.$store.getters["user/currentRoleId"];
-      givenTemplate.projects.forEach(project => (project.status = 1));
+      givenTemplate.applicantRoleId = this.$store.getters['user/currentRoleId'];
+      givenTemplate.projects.forEach((project) => (project.status = 1));
 
       console.log(givenTemplate);
       // 想后端请求新的recipe编号;
       getNewCollectionId(this.type).then(
-        response => {
+        (response) => {
           const newCollectionId = response.data.data.collectionId;
           givenTemplate.collectionId = newCollectionId;
           this.caseExaminations.collections.push(givenTemplate);
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
     },
     handleAddTemplate(collection) {
-      console.log("开始添加模版");
+      console.log('开始添加模版');
       this.newTemplate = Object.assign({}, collection);
       this.dialogAddTemplate = true;
     },
     handleConfirmAddTemplate() {
-      this.newTemplate.roleId = this.$store.getters["user/currentRoleId"];
+      this.newTemplate.roleId = this.$store.getters['user/currentRoleId'];
       this.newTemplate.type = this.type;
-      this.newTemplate.departmentId = this.$store.getters[
-        "user/currentDepartmentId"
-      ];
-      console.log("新检查/检验组套：");
+      this.newTemplate.departmentId = this.$store.getters['user/currentDepartmentId'];
+      console.log('新检查/检验组套：');
       console.log(this.newTemplate);
       saveProjectTemplate(this.newTemplate).then(
-        response => {
-          successDialog("成功添加组套");
-          this.$refs.projectTemplateComponent.listAllTemplates(
-            this.$store.getters["user/currentRoleId"],
-            this.type
-          );
+        (response) => {
+          successDialog('成功添加组套');
+          this.$refs.projectTemplateComponent.listAllTemplates(this.$store.getters['user/currentRoleId'], this.type);
         },
-        error => {
-          failDialog("组套添加失败");
+        (error) => {
+          failDialog('组套添加失败');
           console.log(error);
         }
       );
       this.dialogAddTemplate = false;
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     listAllProjects(this.type).then(
-      response => {
+      (response) => {
         this.projects = response.data.data;
       },
-      error => {
+      (error) => {
         console.log(error);
       }
     );
   },
   components: {
-    "project-template": ProjectTemplate
-  }
+    'project-template': ProjectTemplate,
+  },
 };
 </script>
 

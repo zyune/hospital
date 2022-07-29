@@ -22,10 +22,10 @@
 
 <script>
 import PatientRegistration from './Child/PatientRegistration';
-// import TollAdmin from './Child/TollAdmin';
-// import DailySummary from './Child/DailySummary';
-// import HistorySearch from './Child/HistorySearch';
-// import InvoiceManagement from './Child/InvoiceManagement';
+import TollAdmin from './Child/TollAdmin';
+import DailySummary from './Child/DailySummary';
+import HistorySearch from './Child/HistorySearch';
+import InvoiceManagement from './Child/InvoiceManagement';
 
 export default {
   name: 'Cashier',

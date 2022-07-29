@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import store from '@/store';
+import { getUserInfo } from '@/api/user';
 
 Vue.use(VueRouter);
 
@@ -212,6 +214,82 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+const whiteList = ['/login'];
+// 每次跳转前检查登陆状态，如果未登陆，则路由至登陆页面
+router.beforeEach((to, from, next) => {
+  // console.log('haha');
+  // console.log(store.getters['user/currentUserId']);
+  // console.log(store.getters['user/token'], to.matched);
+  // if (to.matched.some((record) => record.meta.requiresAuth)) {
+  //   console.log('00000');
+  //   // this route requires auth, check if logged in
+  //   // if not, redirect to login page.
+  //   console.log('验证是否有token');
+  //   console.log(store.getters['user/token']);
+  //   if (!store.getters['user/token']) {
+  //     console.log('111');
+  //     next({
+  //       path: '/login',
+  //       query: {
+  //         redirect: to.fullPath,
+  //       },
+  //     });
+  //   } else if (store.getters['user/currentUserId'] === '') {
+  //     console.log('111233');
+  //     // 如果login后必定加载的信息还没被加载，则发送请求加载
+  //     getUserInfo(store.getters['user/token']).then(
+  //       (response) => {
+  //         const data = response.data.data;
+  //         console.log(data);
+  //         store.commit('user/setName', data.datauserName);
+  //         store.commit('user/setId', data.userId);
+  //         store.commit('user/setAvatar', data.avatar);
+  //         store.commit('user/setRoles', data.roles);
+  //         next();
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     );
+  //   } else {
+  //     next();
+  //   }
+  // } else {
+  //   next();
+  // }
+  if (store.getters['user/token']) {
+    if (to.path === '/login') {
+      next('/');
+    }
+    if (store.getters['user/currentUserId'] === '') {
+      // 如果login后必定加载的信息还没被加载，则发送请求加载
+      getUserInfo(store.getters['user/token']).then(
+        (response) => {
+          const data = response.data.data;
+          console.log(data);
+          store.commit('user/setName', data.datauserName);
+          store.commit('user/setId', data.userId);
+          store.commit('user/setAvatar', data.avatar);
+          store.commit('user/setRoles', data.roles);
+          next();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    next();
+  } else {
+    // 到登录页面
+    // 没有token的情况下，可以进入白名单
+    if (whiteList.indexOf(to.path) > -1) {
+      next();
+    } else {
+      next('/login');
+    }
+  }
 });
 
 export default router;

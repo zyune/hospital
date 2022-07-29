@@ -71,10 +71,10 @@
       </div>
     </el-card>
 
-    <el-dialog :visible.sync="addDiseaseDialogVisible" width="60%" :before-close="handleClose">
+    <el-dialog :visible="addDiseaseDialogVisible" width="60%" :before-close="handleClose1">
       <disease-adder>添加诊断目录</disease-adder>
     </el-dialog>
-    <el-dialog :visible.sync="editDiseaseDialogVisible" width="60%" :before-close="handleClose">
+    <el-dialog :visible="editDiseaseDialogVisible" width="60%" :before-close="handleClose2">
       <disease-editor v-model="currentDisease">编辑诊断目录信息</disease-editor>
     </el-dialog>
   </div>
@@ -97,6 +97,7 @@ export default {
       input: '',
       addDiseaseDialogVisible: false,
       editDiseaseDialogVisible: false,
+      chosenOption: '',
       searchOptions: [
         {
           value: 'diseaseId',
@@ -207,6 +208,12 @@ export default {
         (this.currentPage - 1) * this.currentSize,
         (this.currentPage - 1) * this.currentSize + this.currentSize
       );
+    },
+    handleClose1() {
+      this.addDiseaseDialogVisible = false;
+    },
+    handleClose2() {
+      this.editDiseaseDialogVisible = false;
     },
   },
 

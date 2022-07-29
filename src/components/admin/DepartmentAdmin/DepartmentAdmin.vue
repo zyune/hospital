@@ -72,13 +72,12 @@
       </div>
     </el-card>
 
-    <el-dialog :visible.sync="addDepartmentDialogVisible" width="60%" :before-close="handleClose">
+    <el-dialog :visible.sync="addDepartmentDialogVisible" width="60%" :before-close="handleClose1">
       <department-adder>添加科室</department-adder>
     </el-dialog>
-    <el-dialog :visible.sync="editDepartmentDialogVisible" width="60%" :before-close="handleClose">
+    <el-dialog :visible.sync="editDepartmentDialogVisible" width="60%" :before-close="handleClose2">
       <department-editor v-model="currentDepartment">编辑科室信息</department-editor>
     </el-dialog>
-    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
   </div>
 </template>
 
@@ -115,6 +114,7 @@ export default {
       currentPage: 1,
       currentSize: 10,
       currentDepartment: {},
+      chosenOption: '',
     };
   },
 
@@ -210,6 +210,12 @@ export default {
         (this.currentPage - 1) * this.currentSize,
         (this.currentPage - 1) * this.currentSize + this.currentSize
       );
+    },
+    handleClose1() {
+      this.editDepartmentDialogVisible = false;
+    },
+    handleClose2() {
+      this.addDepartmentDialogVisible = false;
     },
   },
 

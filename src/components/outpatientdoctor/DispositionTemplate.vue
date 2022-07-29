@@ -66,24 +66,22 @@
   </div>
 </template>
 
-
 <script>
-import { listProjectTemplate } from "@/api/projectTemplate";
-import { connect } from "net";
+import { listProjectTemplate } from '@/api/projectTemplate';
 
 export default {
-  name: "dispositionTemplate",
+  name: 'dispositionTemplate',
   data() {
     return {
       personalTemplates: [],
       departmentTemplates: [],
       hospitalTemplates: [],
-      currentTemplate: {}
+      currentTemplate: {},
     };
   },
   props: {
     type: Number,
-    typeName: String
+    typeName: String,
   },
   methods: {
     handleShowDetail(row) {
@@ -92,48 +90,40 @@ export default {
     },
     handleUseTemplate(row) {
       this.currentTemplate = Object.assign({}, row);
-      this.$emit("give-project-template", this.currentTemplate);
+      this.$emit('give-project-template', this.currentTemplate);
     },
     listAllTemplates(roleId, type) {
       listProjectTemplate(roleId, type).then(
-        response => {
-          console.log(
-            "[[[[[[[[[[[[[   请求处置模版 ]]]]]]]]]]]]]]" + this.typeName
-          );
+        (response) => {
+          console.log('[[[[[[[[[[[[[   请求处置模版 ]]]]]]]]]]]]]]' + this.typeName);
           this.personalTemplates = response.data.data.personalTemplates;
           this.hospitalTemplates = response.data.data.hospitalTemplates;
           this.departmentTemplates = response.data.data.departmentTemplates;
         },
-        error => {
+        (error) => {
           console.log(error);
         }
       );
-    }
+    },
   },
-  mounted: function() {
+  mounted: function () {
     // 请求所有模版
-    listProjectTemplate(
-      this.$store.getters["user/currentRoleId"],
-      this.type
-    ).then(
-      response => {
-        console.log(
-          "[[[[[[[[[[[[[   请求处置模版 ]]]]]]]]]]]]]]" + this.typeName
-        );
+    listProjectTemplate(this.$store.getters['user/currentRoleId'], this.type).then(
+      (response) => {
+        console.log('[[[[[[[[[[[[[   请求处置模版 ]]]]]]]]]]]]]]' + this.typeName);
         this.personalTemplates = response.data.data.personalTemplates;
         this.hospitalTemplates = response.data.data.hospitalTemplates;
         this.departmentTemplates = response.data.data.departmentTemplates;
       },
-      error => {
+      (error) => {
         console.log(error);
       }
     );
-  }
+  },
 };
 </script>
 
-
-<style lang="">
+<style>
 .project-template {
   display: grid;
   grid-template-columns: 40% 60%;
