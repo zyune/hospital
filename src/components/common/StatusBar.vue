@@ -39,8 +39,9 @@
               p-id="7970"
               fill="#ffffff"
             ></path></svg
-          >首页
+          >{{ $t('home') }}
         </span>
+        <LangSelect :bg="'#fff'" />
       </el-menu-item>
       <el-submenu index="1">
         <template slot="title">
@@ -114,11 +115,12 @@ import { setUserAvatar, updateUserPassword } from '@/api/user';
 import { memberExpression } from '@babel/types';
 import { setTimeout } from 'timers';
 import { validatePasswordChange } from '@/utils/validate';
-
+import LangSelect from '@/components/LangSelect';
 export default {
   name: 'StatusBar',
   components: {
     'avatar-cropper': AvatarCropper,
+    LangSelect,
   },
   data() {
     return {

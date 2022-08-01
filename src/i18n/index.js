@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import zhCNLocale from './lang/zh-CN';
 import enLocale from './lang/en';
-
+import store from '@/store';
 /*element ui国际化*/
 import locale from 'element-ui/lib/locale';
 Vue.use(VueI18n);
@@ -16,8 +16,9 @@ const message = {
   },
 };
 
+console.log(store.getters['user/lang'], '当前语言======');
 const i18n = new VueI18n({
-  locale: localStorage.getItem('lang') || 'zh', // 语言,
+  locale: store.getters['user/lang'], // 语言,
   messages: message,
 });
 

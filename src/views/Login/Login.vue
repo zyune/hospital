@@ -6,13 +6,14 @@
           <img src="@/assets/icons/project_logo.png" />
         </div>
         <h2 class="login-title color-main">{{ $t('login.btn') }}</h2>
+        <LangSelect />
         <el-form-item>
           <el-input
             name="userId"
             type="text"
             v-model="loginForm.userId"
             autocomplete="on"
-            placeholder="请输入用户ID"
+            placeholder= "请输入用户ID"
             clearable
           >
             <span slot="prefix">
@@ -53,7 +54,7 @@
 <script>
 import login_center_bg from '@/assets/images/login_center_bg.png';
 import { getQueryString } from '@/utils/url';
-
+import LangSelect from '@/components/LangSelect';
 export default {
   name: 'login',
   data() {
@@ -112,6 +113,9 @@ export default {
           }
         );
     },
+  },
+  components: {
+    LangSelect,
   },
 };
 </script>
