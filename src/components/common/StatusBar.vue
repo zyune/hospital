@@ -39,7 +39,7 @@
               p-id="7970"
               fill="#ffffff"
             ></path></svg
-          >{{ $t('home') }}
+          >{{ $t('home.icon') }}
         </span>
         <LangSelect :bg="'#fff'" />
       </el-menu-item>

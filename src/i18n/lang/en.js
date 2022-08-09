@@ -2,7 +2,11 @@ export default {
   login: {
     title: 'login',
     btn: 'login',
-    useridinput:'input User ID',
+    useridinput:'Input User ID',
+    userpasswordinput:'Input Password',
   },
-  home: 'home',
+  home:{
+    icon:'Home',
+    section:'My Office'
+  },
 };

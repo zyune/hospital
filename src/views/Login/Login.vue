@@ -13,7 +13,7 @@
             type="text"
             v-model="loginForm.userId"
             autocomplete="on"
-            placeholder= "请输入用户ID"
+            :placeholder= "$t('login.useridinput')"
             clearable
           >
             <span slot="prefix">
@@ -28,7 +28,7 @@
             @keyup.enter.native="handleLogin"
             v-model="loginForm.password"
             autocomplete="off"
-            placeholder="请输入密码"
+            :placeholder="$t('login.userpasswordinput')"
             clearable
           >
             <span slot="prefix">
