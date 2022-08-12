@@ -1,7 +1,7 @@
 # 定义两个服务
 upstream nginx_canary {
-  server http://52.70.206.61:1923 weight=50;
-  server http://44.202.149.35:1923 weight=50;
+  server http://52.70.206.61:1923/api/v1/hospital-backend weight=50;
+  server http://44.202.149.35:1923/api/v1/hospital-backend weight=50;
   # 如果不想使用哪个服务就weight=down
 }
 
