@@ -1,3 +1,10 @@
+# 定义两个服务
+upstream nginx_canary {
+  server http://52.70.206.61:1923 weight=50;
+  server http://44.202.149.35:1923 weight=50;
+  # 如果不想使用哪个服务就weight=down
+}
+
 server {
 
   listen 80 default_server;
@@ -49,5 +56,15 @@ server {
 
   location = /50x.html {
     root  /usr/share/nginx/html;
+  }
+
+  # 配置后端接口
+  location /api {
+    try_files $uri @nodejs;
+  }
+
+  # 负载均衡的使用方式
+  location @nodejs {
+    proxy_pass http://nginx_canary;
   }
 }
